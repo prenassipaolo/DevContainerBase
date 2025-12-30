@@ -1,16 +1,31 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
     "name": "Python Dev Container",
     "build": {
         "dockerfile": "Dockerfile",
-        "context": ".."
+        "context": "..",
+        "args": {
+            "BASE_VERSION": "3.14-bookworm"
+        }
     },
     "customizations": {
         "vscode": {
             "extensions": [
                 "ms-python.python",
+                "ms-python.debugpy",
                 "ms-python.vscode-pylint",
-                "ms-python.debugpy"
-            ]
+                "ms-python.vscode-pylance",
+                "ms-toolsai.datawrangles",
+                "ms-toolsai.jupyter",
+                "eamodio.gitlens",
+                "Gruntfuggly.todo-tree",
+                "esbenp.prettier-vscode"
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "python.terminal.activateEnvInCurrentTerminal": true
+            }
         }
     },
     "remoteUser": "vscode"
