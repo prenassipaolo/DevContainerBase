@@ -22,10 +22,10 @@
                 "Gruntfuggly.todo-tree",
                 "esbenp.prettier-vscode"
             ],
-            "settings": {
-                "terminal.integrated.defaultProfile.linux": "zsh",
-                "python.terminal.activateEnvInCurrentTerminal": true
-            }
+            // "settings": {
+            //     "terminal.integrated.defaultProfile.linux": "zsh",
+            //     "python.terminal.activateEnvInCurrentTerminal": true
+            // }
         }
     },
     "remoteUser": "vscode"
