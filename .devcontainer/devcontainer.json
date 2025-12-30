@@ -21,7 +21,7 @@
                 "eamodio.gitlens",
                 "Gruntfuggly.todo-tree",
                 "esbenp.prettier-vscode"
-            ],
+            ]
             // "settings": {
             //     "terminal.integrated.defaultProfile.linux": "zsh",
             //     "python.terminal.activateEnvInCurrentTerminal": true
