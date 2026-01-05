@@ -12,8 +12,8 @@ RUN apt-get update && \
 # Upgrade pip
 RUN pip install --upgrade pip
 # Install producction dependencies from requirements.txt if it exists
-COPY requirements.txt /tmp/requirements.txt
-RUN pip install -r /tmp/requirements.txt && rm -f /tmp/requirements.txt
+# COPY requirements.txt /tmp/requirements.txt
+# RUN pip install -r /tmp/requirements.txt && rm -f /tmp/requirements.txt
 # Install dev dependencies from dev-requirements.txt if it exists
 # COPY dev-requirements.txt /tmp/dev-requirements.txt
 # RUN pip install -r /tmp/dev-requirements.txt && rm -f /tmp/dev-requirements.txt
@@ -33,9 +33,9 @@ WORKDIR /workspaces/DevContainerBase
 # Install Oh My Zsh if not present
 # RUN wget https://github.com/robbyrussel/oh-my-zsh/tree/master/tools/install.sh -O - | zsh || true
 
-# Install the zsh coustom theme
+# Install the zsh custom theme
 RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
-# Move pre-configured zsh files into the container $HOME folder to use the zsh custom theme
-COPY ./zsh/.zshrc $HOME
-COPY ./zsh/.p10k.zsh $HOME
+# # Move pre-configured zsh files into the container $HOME folder to use the zsh custom theme
+COPY .devcontainer/zsh/.zshrc $HOME
+COPY .devcontainer/zsh/.p10k.zsh $HOME
 
