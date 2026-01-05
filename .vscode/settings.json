@@ -13,5 +13,6 @@
         "editor.wordBasedSuggestions": "off",
         "editor.formatOnSave": false
     },
-    "editor.formatOnSave": false
+    "editor.formatOnSave": false,
+    "terminal.integrated.defaultProfile.linux": "zsh"
 }
