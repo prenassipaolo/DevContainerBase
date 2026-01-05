@@ -1,7 +1,6 @@
-# ARG BASE_VERSION
+ARG BASE_VERSION
 
-# FROM mcr.microsoft.com/devcontainers/python:$BASE_VERSION
-FROM mcr.microsoft.com/devcontainers/python:3.14-bookworm
+FROM mcr.microsoft.com/devcontainers/python:$BASE_VERSION
 
 # Install git
 RUN apt-get update && \
