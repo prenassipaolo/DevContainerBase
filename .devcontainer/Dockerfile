@@ -27,8 +27,15 @@ ENV HOME /home/$USER_NAME
 # Create a non-root user (otherwise it most likely installs in root)
 USER $USER_NAME
 
-#Install Oh My Zsh
-# RUN wget https://github.com/robbyrussel/oh-my-zsh/tree/master/tools/install.sh -O - | zsh || true
-
 # Set working directory
 WORKDIR /workspaces/DevContainerBase
+
+# Install Oh My Zsh if not present
+# RUN wget https://github.com/robbyrussel/oh-my-zsh/tree/master/tools/install.sh -O - | zsh || true
+
+# Install the zsh coustom theme
+RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+# Move pre-configured zsh files into the container $HOME folder to use the zsh custom theme
+COPY ./zsh/.zshrc $HOME
+COPY ./zsh/.p10k.zsh $HOME
+
