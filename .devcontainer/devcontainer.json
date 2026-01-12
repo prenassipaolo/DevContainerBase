@@ -6,7 +6,8 @@
         "dockerfile": "Dockerfile",
         "context": "..",
         "args": {
-            "BASE_VERSION": "3.14-bookworm"
+            "BASE_VERSION": "3.14-bookworm",
+            "UV_VERSION": "latest"
         }
     },
     "customizations": {
@@ -21,12 +22,13 @@
                 "eamodio.gitlens",
                 "Gruntfuggly.todo-tree",
                 "esbenp.prettier-vscode"
-            ]
-            // "settings": {
-            //     "terminal.integrated.defaultProfile.linux": "zsh",
-            //     "python.terminal.activateEnvInCurrentTerminal": true
-            // }
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "python.terminal.activateEnvInCurrentTerminal": true
+            }
         }
     },
-    "remoteUser": "vscode"
+    "remoteUser": "vscode",
+    "postCreateCommand": "bash ./.devcontainer/scripts/post-create.sh",
 }

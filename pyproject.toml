@@ -1,0 +1,24 @@
+[project]
+name = "DevContainerBase"
+version = "0.1.0"
+description = "A base development container setup."
+authors = [
+    { name = "Paolo Prenassi", email = "prenassipaolo@gmail.com" },
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = "==3.14"
+dependencies = [
+    "requests>=2.31.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+    "black>=25.12.0",
+]
+test = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.0.0",
+]
