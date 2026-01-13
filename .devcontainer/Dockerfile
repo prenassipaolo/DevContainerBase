@@ -15,7 +15,8 @@ ENV HOME=/home/$USER_NAME
 # ENV UV_PROJECT_ENVIRONMENT=/home/$USER_NAME/.
 # Add the venv bin to path so we don't have to 'source' it
 # ENV PATH="$UV_PROJECT_ENVIRONMENT/bin:$PATH"
-ENV PYTHONDONTWRITEBYTECODE=True \
+ENV UV_PROJECT_ENVIRONMENT=/$HOME/DevContainerBase/.venv \
+    PYTHONDONTWRITEBYTECODE=True \
     PYTHONUNBUFFERED=True \
     UV_LINK_MODE=copy
 
@@ -25,12 +26,6 @@ RUN apt-get update && \
     apt-get install -y git \
     && rm -rf /var/lib/apt/lists/*
 
-# Install git
-RUN apt-get update && apt-get install -y git \
-    && rm -rf /var/lib/apt/lists/*
-
-# Create a non-root user (otherwise it most likely installs in root)
-USER $USER_NAME
 
 # Set working directory
 WORKDIR /workspaces/DevContainerBase

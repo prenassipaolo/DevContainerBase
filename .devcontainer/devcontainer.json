@@ -12,6 +12,12 @@
     },
     "customizations": {
         "vscode": {
+            "settings": {
+                // Point VS Code to the venv created in the Dockerfile
+                "python.defaultInterpreterPath": "/workspaces/app/.venv/bin/python",
+                "python.terminal.activateEnvInCurrentTerminal": true,
+                "terminal.integrated.defaultProfile.linux": "zsh"
+            },
             "extensions": [
                 "ms-python.python",
                 "ms-python.debugpy",
@@ -22,13 +28,9 @@
                 "eamodio.gitlens",
                 "Gruntfuggly.todo-tree",
                 "esbenp.prettier-vscode"
-            ],
-            "settings": {
-                "terminal.integrated.defaultProfile.linux": "zsh",
-                "python.terminal.activateEnvInCurrentTerminal": true
-            }
+            ]
         }
     },
     "remoteUser": "vscode",
-    "postCreateCommand": "bash ./.devcontainer/scripts/post-create.sh",
+    "postCreateCommand": "bash .devcontainer/scripts/post-create.sh"
 }
