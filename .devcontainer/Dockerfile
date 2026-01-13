@@ -11,12 +11,14 @@ FROM mcr.microsoft.com/devcontainers/python:$BASE_VERSION
 ENV USER_NAME=vscode
 ENV HOME=/home/$USER_NAME
 
+# Switch to non-root user
+USER $USER_NAME
+
 # Ensure the virtualenv is created in the project directory
 # ENV UV_PROJECT_ENVIRONMENT=/home/$USER_NAME/.
 # Add the venv bin to path so we don't have to 'source' it
 # ENV PATH="$UV_PROJECT_ENVIRONMENT/bin:$PATH"
-ENV UV_PROJECT_ENVIRONMENT=/$HOME/DevContainerBase/.venv \
-    PYTHONDONTWRITEBYTECODE=True \
+ENV PYTHONDONTWRITEBYTECODE=True \
     PYTHONUNBUFFERED=True \
     UV_LINK_MODE=copy
 
@@ -28,7 +30,7 @@ RUN apt-get update && \
 
 
 # Set working directory
-WORKDIR /workspaces/DevContainerBase
+# WORKDIR /workspaces/DevContainerBase
 
 # Install all dependencies (dev, test, etc.)
 # RUN pip install --upgrade pip
@@ -36,7 +38,7 @@ WORKDIR /workspaces/DevContainerBase
 
 # Pre-install dependencies
 # We copy only the dependency files first to leverage Docker cache
-COPY --from=uv_builder --chown=$USER_NAME:$USER_NAME /uv /uvx /bin/
+COPY --from=uv_builder --chown=$USER_NAME: /uv /uvx /bin/
 # COPY --from=uv_builder --chown=$USER_NAME:$USER_NAME pyproject.toml uv.lock* ./
 
 # Install Oh My Zsh if not present
@@ -45,7 +47,5 @@ COPY --from=uv_builder --chown=$USER_NAME:$USER_NAME /uv /uvx /bin/
 # Install the zsh custom theme
 RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 # # Move pre-configured zsh files into the container $HOME folder to use the zsh custom theme
-COPY .devcontainer/zsh/.zshrc $HOME
-COPY .devcontainer/zsh/.p10k.zsh $HOME
-
-
+COPY ./zsh/.zshrc $HOME
+COPY ./zsh/.p10k.zsh $HOME
