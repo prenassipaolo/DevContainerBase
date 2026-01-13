@@ -1,11 +1,11 @@
+# Arguments from devcontainer.json
 ARG BASE_VERSION
 ARG UV_VERSION
 
-# Use the uv image as a build stage to copy uv binary from it
+# Use uv image as a build stage to copy the binary later
 FROM ghcr.io/astral-sh/uv:$UV_VERSION as uv_builder
 # This base image has to stay last
 FROM mcr.microsoft.com/devcontainers/python:$BASE_VERSION
-
 
 # Ensure the virtualenv is created in the project directory
 ENV UV_PROJECT_ENVIRONMENT=./.venv
@@ -15,24 +15,16 @@ ENV PYTHONDONTWRITEBYTECODE=True \
     PYTHONUNBUFFERED=True \
     UV_LINK_MODE=copy
 
-
 # Install git
 RUN apt-get update && \
     apt-get install -y git \
     && rm -rf /var/lib/apt/lists/*
 
-
 # Set working directory
 # WORKDIR /workspaces/DevContainerBase
 
-# Install all dependencies (dev, test, etc.)
-# RUN pip install --upgrade pip
-# RUN pip install -r requirements.txt
-
-# Pre-install dependencies
-# We copy only the dependency files first to leverage Docker cache
+# Copy system dependency files to leverage Docker cache
 COPY --from=uv_builder --chown=$USER_NAME:$USER_NAME /uv /uvx /bin/
-# COPY --from=uv_builder --chown=$USER_NAME:$USER_NAME pyproject.toml uv.lock* ./
 
 # Set environment variables
 ENV USER_NAME=vscode
