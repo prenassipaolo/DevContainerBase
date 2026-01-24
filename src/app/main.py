@@ -8,4 +8,8 @@ app.include_router(router)
 
 @app.get("/")
 async def root():
-    return {"message": "Welcome to the Task Manager API. Visit /docs for Swagger UI."}
+    return {
+        "status": "online", 
+        "environment": "devcontainer", 
+        "message": "Welcome to the Task Manager API. Visit /docs for Swagger UI."
+    }
